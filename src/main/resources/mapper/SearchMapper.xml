@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lightstorage.mapper.SearchMapper">
+
+    <select id="searchTotal" resultType="com.example.lightstorage.dto.Message">
+        SELECT COUNT('lamp_id') AS total FROM lamp_msg
+    </select>
+
+    <select id="searchLampByName" resultType="com.example.demo.entity.Lamp_Msg">
+        SELECT * FROM lamp_msg WHERE lamp_name like '%${query}%' LIMIT #{pagenum},#{pagesize}
+    </select>
+
+</mapper>
