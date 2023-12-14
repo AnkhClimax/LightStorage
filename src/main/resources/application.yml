@@ -29,4 +29,5 @@ pagehelper:
   supportMethodsArguments: false # 默认值false，
   params: count=countSql
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.example.lightstorage

@@ -1,6 +1,7 @@
 package com.example.lightstorage.controller;
 
 import com.example.lightstorage.dto.Message;
+import com.example.lightstorage.dto.ResultBean;
 import com.example.lightstorage.dto.ResultEnum;
 import com.example.lightstorage.service.SearchService;
 import com.example.lightstorage.vo.SearchVO;
@@ -18,10 +19,25 @@ public class SearchController {
     public SearchVO searchLampByName(String query,Integer cid,Integer pagenum,Integer pagesize){
 
         SearchVO searchVO=new SearchVO();
+        searchVO.setMeta(ResultBean.error());
 
+        /*
+        * 关键词为空
+        * */
+        if(query == null){
+            return searchVO;
+        }
         Message message = searchService.searchLampByName(query, cid, pagenum, pagesize);
+
+        /*
+        * 找不到数据
+        * */
+        if(message == null){
+            return searchVO;
+        }
+
         searchVO.setMessage(message);
-        searchVO.setMeta(ResultEnum.SUCCESS);
+        searchVO.setMeta(ResultBean.success());
 
         return searchVO;
     }
